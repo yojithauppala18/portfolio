@@ -1,0 +1,74 @@
+import { Database, Brain, Cloud, BarChart3 } from "lucide-react";
+
+const AboutSection = () => {
+  const services = [
+    {
+      icon: Database,
+      title: "Data Engineering",
+      description: "Building scalable ETL pipelines, cloud infrastructure (GCP/AWS), and big data processing with Spark, Airflow, and Kafka.",
+    },
+    {
+      icon: BarChart3,
+      title: "Data Science",
+      description: "Predictive modeling, statistical analysis, A/B testing, and extracting actionable insights from complex datasets.",
+    },
+    {
+      icon: Brain,
+      title: "AI & Machine Learning",
+      description: "LLMs, RAG systems, Transformers, NLP, deep learning architectures, and production ML model deployment.",
+    },
+    {
+      icon: Cloud,
+      title: "Cloud & MLOps",
+      description: "CI/CD pipelines, Docker containerization, Kubernetes, model monitoring, and end-to-end ML lifecycle management.",
+    },
+  ];
+
+  return (
+    <section className="animate-fade-in">
+      <h2 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-3">
+        About Me
+        <span className="flex-1 h-px bg-gradient-to-r from-primary/50 to-transparent ml-4" />
+      </h2>
+
+      <div className="space-y-4 text-muted-foreground mb-8">
+        <p>
+          I'm a versatile data professional passionate about building intelligent systems that transform raw data into impactful solutions. With expertise spanning <span className="text-foreground font-medium">Data Engineering</span>, <span className="text-foreground font-medium">Data Science</span>, and <span className="text-foreground font-medium">AI/ML Engineering</span>, I bring a holistic approach to solving complex data challenges.
+        </p>
+        <p>
+          Currently pursuing my <span className="text-primary">MS in Business Analytics & AI</span> at The University of Texas at Dallas, I combine academic rigor with hands-on industry experience. From designing fault-tolerant data pipelines processing millions of records to deploying LLM-powered systems that enhance decision-making, I thrive at the intersection of engineering excellence and machine intelligence.
+        </p>
+        <p>
+          My work is driven by a simple philosophy: build scalable, reliable systems that deliver measurable business impact while maintaining clean, maintainable code.
+        </p>
+      </div>
+
+      {/* What I'm Doing Section */}
+      <h3 className="text-xl font-semibold text-foreground mb-6">What I'm Doing</h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className="bg-secondary/50 rounded-2xl p-5 gold-border hover:bg-secondary/80 transition-all duration-300 group"
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <div className="flex gap-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                <service.icon className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="text-foreground font-medium mb-2">{service.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
