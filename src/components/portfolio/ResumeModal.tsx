@@ -1,11 +1,5 @@
-import { FileText, Download, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { FileText, Download } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 const ResumeModal = () => {
@@ -30,12 +24,16 @@ const ResumeModal = () => {
           <FileText className="w-4 h-4" />
         </button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl h-[85vh] bg-card border-border p-0 overflow-hidden">
+
+      {/* ✅ Make DialogContent a flex column */}
+      <DialogContent className="max-w-4xl h-[85vh] bg-card border-border p-0 overflow-hidden flex flex-col">
+        {/* Header fixed at top */}
         <DialogHeader className="px-4 py-3 flex flex-row items-center justify-between border-b border-border">
           <DialogTitle className="text-foreground flex items-center gap-2">
             <FileText className="w-5 h-5 text-primary" />
             Yojitha Uppala Resume
           </DialogTitle>
+
           <Button
             onClick={handleDownload}
             size="sm"
@@ -45,10 +43,12 @@ const ResumeModal = () => {
             Download
           </Button>
         </DialogHeader>
-        <div className="flex-1 px-4 pb-4 pt-2 h-full">
+
+        {/* ✅ This now fills remaining height */}
+        <div className="flex-1 p-3">
           <iframe
             src={resumeUrl}
-            className="w-full h-full rounded-lg border border-border bg-secondary"
+            className="w-full h-full rounded-md border border-border bg-secondary"
             title="Resume Preview"
           />
         </div>
