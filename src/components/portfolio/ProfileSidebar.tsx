@@ -1,11 +1,11 @@
-import { Mail, Phone, MapPin, Calendar, Github, Linkedin, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 import avatar from "@/assets/avatar.png";
+import ResumeModal from "./ResumeModal";
 
 const ProfileSidebar = () => {
   const contactInfo = [
     { icon: Mail, label: "Email", value: "yojitha.188@gmail.com", href: "mailto:yojitha.188@gmail.com" },
     { icon: Phone, label: "Phone", value: "(469) 688-7337", href: "tel:+14696887337" },
-    { icon: Calendar, label: "Birthday", value: "August 1, 1999" },
     { icon: MapPin, label: "Location", value: "Dallas, TX, USA" },
   ];
 
@@ -13,7 +13,6 @@ const ProfileSidebar = () => {
     { icon: Github, href: "https://github.com/yojitha", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/yojitha-uppala-07b6b1178/", label: "LinkedIn" },
   ];
-
   return (
     <aside className="w-full lg:w-80 lg:min-w-80 lg:sticky lg:top-8 lg:self-start">
       <div className="bg-card rounded-3xl p-6 gold-border card-shadow">
@@ -79,6 +78,7 @@ const ProfileSidebar = () => {
               <link.icon className="w-4 h-4" />
             </a>
           ))}
+          <ResumeModal />
         </div>
       </div>
     </aside>
