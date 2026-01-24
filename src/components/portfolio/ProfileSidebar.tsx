@@ -10,8 +10,8 @@ const ProfileSidebar = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/yojitha", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/yojitha-uppala-07b6b1178/", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/yojithauppala18", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/yojithauppala/", label: "LinkedIn" },
   ];
   return (
     <aside className="w-full lg:w-80 lg:min-w-80 lg:sticky lg:top-8 lg:self-start">
@@ -19,11 +19,7 @@ const ProfileSidebar = () => {
         {/* Avatar */}
         <div className="flex justify-center mb-4">
           <div className="w-32 h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-muted to-secondary">
-            <img
-              src={avatar}
-              alt="Yojitha Uppala"
-              className="w-full h-full object-cover"
-            />
+            <img src={avatar} alt="Yojitha Uppala" className="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -46,9 +42,7 @@ const ProfileSidebar = () => {
                 <item.icon className="w-5 h-5 text-primary" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">
-                  {item.label}
-                </p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-0.5">{item.label}</p>
                 {item.href ? (
                   <a
                     href={item.href}
