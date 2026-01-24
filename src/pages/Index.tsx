@@ -2,7 +2,9 @@ import { useState } from "react";
 import ProfileSidebar from "@/components/portfolio/ProfileSidebar";
 import Navigation from "@/components/portfolio/Navigation";
 import AboutSection from "@/components/portfolio/AboutSection";
-import ResumeSection from "@/components/portfolio/ResumeSection";
+import ExperienceSection from "@/components/portfolio/ExperienceSection";
+import EducationSection from "@/components/portfolio/EducationSection";
+import SkillsSection from "@/components/portfolio/SkillsSection";
 import PortfolioSection from "@/components/portfolio/PortfolioSection";
 import ContactSection from "@/components/portfolio/ContactSection";
 
@@ -13,8 +15,12 @@ const Index = () => {
     switch (activeTab) {
       case "about":
         return <AboutSection />;
-      case "resume":
-        return <ResumeSection />;
+      case "experience":
+        return <ExperienceSection />;
+      case "education":
+        return <EducationSection />;
+      case "skills":
+        return <SkillsSection />;
       case "portfolio":
         return <PortfolioSection />;
       case "contact":
