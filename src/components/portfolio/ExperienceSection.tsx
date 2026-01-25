@@ -4,7 +4,7 @@ const ExperienceSection = () => {
   const experience = [
     {
       period: "Aug 2025 — Dec 2025",
-      title: "Graduate Teaching Assistant",
+      title: "Graduate Teaching Assistant - Applied Natural Language Processing",
       company: "The University of Texas at Dallas",
       details:
         "Teaching Data Visualization & Business Intelligence to 200+ students. Mentoring on Tableau, Power BI, and Python analytics.",
