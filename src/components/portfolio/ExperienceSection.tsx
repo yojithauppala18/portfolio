@@ -1,13 +1,21 @@
 import { Briefcase } from "lucide-react";
 
 const ExperienceSection = () => {
-  const experience = [
+  const experience: {
+    period: string;
+    title: string;
+    company: string;
+    details: string | string[];
+  }[] = [
     {
       period: "Aug 2025 — Dec 2025",
       title: "Graduate Teaching Assistant - Applied Natural Language Processing",
       company: "The University of Texas at Dallas",
-      details:
-        "Teaching Data Visualization & Business Intelligence to 200+ students. Mentoring on Tableau, Power BI, and Python analytics.",
+      details: [
+        "Collaborated with faculty and stakeholders to deliver applied NLP and LLM-based solutions using Transformer and BERT architectures, supporting real-world tasks such as text classification, representation learning, and sequence modeling.",
+        "Designed and standardized model evaluation and error analysis workflows for NLP systems, improving model robustness and reducing experimentation and debugging time by 30%.",
+        "Mentored 60+ graduate students in building Transformer and BERT-based architectures, resulting in a 15% average improvement in project performance metrics."
+      ],
     },
     {
       period: "Jan 2025 — Jul 2025",
@@ -46,7 +54,15 @@ const ExperienceSection = () => {
             <span className="text-sm text-primary font-medium">{item.period}</span>
             <h4 className="text-foreground font-medium mt-1">{item.title}</h4>
             <p className="text-muted-foreground text-sm">{item.company}</p>
-            <p className="text-muted-foreground text-xs mt-2 leading-relaxed">{item.details}</p>
+            {Array.isArray(item.details) ? (
+              <ul className="text-muted-foreground text-xs mt-2 leading-relaxed list-disc list-inside space-y-1">
+                {item.details.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-muted-foreground text-xs mt-2 leading-relaxed">{item.details}</p>
+            )}
           </div>
         ))}
       </div>
