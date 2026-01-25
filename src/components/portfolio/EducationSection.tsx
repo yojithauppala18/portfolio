@@ -95,15 +95,15 @@ const EducationSection = () => {
               <span className="text-sm text-muted-foreground text-center mb-3">
                 Salesforce Certified Associate
               </span>
-              <a 
-                href="https://trailhead.salesforce.com/credentials/verification" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors"
+              <CertificateModal 
+                title="Salesforce Certified Associate" 
+                pdfUrl="/Salesforce_Certified_Associate.pdf"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
-                View Certificate
-              </a>
+                <button className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors">
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  View Certificate
+                </button>
+              </CertificateModal>
             </div>
           </div>
         </div>
