@@ -1,6 +1,7 @@
-import { GraduationCap, Award } from "lucide-react";
+import { GraduationCap, Award, ExternalLink } from "lucide-react";
 import salesforceBadge from "@/assets/salesforce-badge.png";
 import googleCloudBadge from "@/assets/google-cloud-badge.png";
+import CertificateModal from "./CertificateModal";
 
 const EducationSection = () => {
   const education = [
@@ -70,9 +71,18 @@ const EducationSection = () => {
                 alt="Google Cloud Professional Data Engineer" 
                 className="w-24 h-24 object-contain mb-2"
               />
-              <span className="text-sm text-muted-foreground text-center">
+              <span className="text-sm text-muted-foreground text-center mb-3">
                 Google Cloud Professional Data Engineer
               </span>
+              <CertificateModal 
+                title="Google Cloud Professional Data Engineer" 
+                pdfUrl="/GoogleCloud_DataEngineer_Certificate.pdf"
+              >
+                <button className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors">
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  View Certificate
+                </button>
+              </CertificateModal>
             </div>
             
             {/* Salesforce - Image Badge */}
@@ -82,11 +92,19 @@ const EducationSection = () => {
                 alt="Salesforce Certified Associate" 
                 className="w-24 h-24 object-contain mb-2"
               />
-              <span className="text-sm text-muted-foreground text-center">
+              <span className="text-sm text-muted-foreground text-center mb-3">
                 Salesforce Certified Associate
               </span>
+              <a 
+                href="https://trailhead.salesforce.com/credentials/verification" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                View Certificate
+              </a>
             </div>
-            
           </div>
         </div>
       </div>
