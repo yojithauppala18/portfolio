@@ -8,13 +8,13 @@ const ExperienceSection = () => {
     details: string | string[];
   }[] = [
     {
-      period: "Aug 2025 — Dec 2025",
+      period: "Aug 2025 - Dec 2025",
       title: "Graduate Teaching Assistant - Applied Natural Language Processing",
       company: "The University of Texas at Dallas",
       details: [
         "Collaborated with faculty and stakeholders to deliver applied NLP and LLM-based solutions using Transformer and BERT architectures, supporting real-world tasks such as text classification, representation learning, and sequence modeling.",
         "Designed and standardized model evaluation and error analysis workflows for NLP systems, improving model robustness and reducing experimentation and debugging time by 30%.",
-        "Mentored 60+ graduate students in building Transformer and BERT-based architectures, resulting in a 15% average improvement in project performance metrics."
+        "Mentored 60+ graduate students in building Transformer and BERT-based architectures, resulting in a 15% average improvement in project performance metrics.",
       ],
     },
     {
