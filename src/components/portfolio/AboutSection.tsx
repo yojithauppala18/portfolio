@@ -3,28 +3,28 @@ import { Database, Brain, Cloud, BarChart3 } from "lucide-react";
 const AboutSection = () => {
   const services = [
     {
-      icon: Database,
-      title: "Data Engineering",
+      icon: Brain,
+      title: "LLM & NLP Systems",
       description:
-        "Building scalable ETL pipelines, cloud infrastructure (GCP/AWS), and big data processing with Spark, Airflow, and Kafka.",
+        "Designing and deploying LLM-powered applications such as retrieval-augmented generation (RAG), semantic search, and question answering with a strong focus on evaluation, robustness, and real-world reliability.",
+    },
+    {
+      icon: Database,
+      title: "End-to-End ML Pipelines",
+      description:
+        "Building production-grade ML pipelines from data ingestion and preprocessing to model training, deployment, and monitoring using scalable cloud and distributed systems.",
     },
     {
       icon: BarChart3,
-      title: "Data Science",
+      title: "Model Evaluation & Experimentation",
       description:
-        "Predictive modeling, statistical analysis, A/B testing, and extracting actionable insights from complex datasets.",
-    },
-    {
-      icon: Brain,
-      title: "AI & Machine Learning",
-      description:
-        "LLMs, RAG systems, Transformers, NLP, deep learning architectures, and production ML model deployment.",
+        "Developing rigorous evaluation frameworks, error analysis workflows, and experimentation pipelines to ensure models are measurable, interpretable, and aligned with business objectives.",
     },
     {
       icon: Cloud,
-      title: "Cloud & MLOps",
+      title: "Production ML & MLOps",
       description:
-        "CI/CD pipelines, Docker containerization, Kubernetes, model monitoring, and end-to-end ML lifecycle management.",
+        "Operationalizing ML systems with CI/CD, containerization, cloud deployment, and monitoring to move models from experimentation into reliable production environments.",
     },
   ];
 
@@ -55,7 +55,7 @@ const AboutSection = () => {
       </div>
 
       {/* What I'm Doing Section */}
-      <h3 className="text-xl font-semibold text-foreground mb-6">What I'm Doing</h3>
+      <h3 className="text-xl font-semibold text-foreground mb-6">What I Build</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {services.map((service, index) => (
