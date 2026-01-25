@@ -5,7 +5,7 @@ const ExperienceSection = () => {
     period: string;
     title: string;
     company: string;
-    details: string | string[];
+    details: string[];
   }[] = [
     {
       period: "Aug 2025 - Dec 2025",
@@ -19,7 +19,7 @@ const ExperienceSection = () => {
     },
     {
       period: "Jan 2025 - Jul 2025",
-      title: "Data Engineering/ Machine Learning Intern",
+      title: "Data Engineering / Machine Learning Intern",
       company: "InnovatEV Global",
       details: [
         "Developed and deployed production-grade ML pipelines by translating business requirements into scalable AI solutions, improving inference throughput by 30% across computer vision workflows.",
@@ -36,15 +36,38 @@ const ExperienceSection = () => {
         "Conducted A/B tests on data retrieval workflows, identifying optimizations that boosted mission-critical analytics performance by 40%.",
       ],
     },
+    {
+      period: "Apr 2022 - May 2022",
+      title: "Data Science Intern",
+      company: "Coincent (Online)",
+      details: [
+        "Developed a rule-based and ML-assisted chatbot for a food-ordering use case (pizza chatbot), translating business requirements into conversational flows and backend logic.",
+        "Implemented data preprocessing and experimentation workflows in Python using Jupyter Notebooks to support model training and chatbot behavior refinement.",
+        "Collaborated with a senior analyst to optimize Python code and improve model performance using structured data pipelines and evaluation techniques.",
+      ],
+    },
   ];
+
+  const researchExperience = {
+    period: "Jul 2023 - Oct 2023",
+    title: "U-Net–Based Landslide Detection (Semantic Segmentation)",
+    company: "National Institute of Technology Agartala",
+    details: [
+      "Designed and optimized a U-Net–based semantic segmentation model for satellite imagery, achieving 91.12% detection accuracy through architecture tuning and custom noise-reduction techniques.",
+      "Conducted domain shift and generalization analysis across diverse geospatial environments, reducing false positives by 12% and improving robustness in unseen terrain conditions.",
+      "Developed structured evaluation and error analysis workflows (precision, recall, F1-score) to translate research insights into practical modeling improvements.",
+    ],
+  };
 
   return (
     <section className="animate-fade-in">
+      {/* Section Header */}
       <h2 className="text-2xl font-semibold text-foreground mb-8 flex items-center gap-3">
-        Experience
+        Professional & Research Experience
         <span className="flex-1 h-px bg-gradient-to-r from-primary/50 to-transparent ml-4" />
       </h2>
 
+      {/* Work History */}
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
           <Briefcase className="w-5 h-5 text-primary" />
@@ -59,17 +82,37 @@ const ExperienceSection = () => {
             <span className="text-sm text-primary font-medium">{item.period}</span>
             <h4 className="text-foreground font-medium mt-1">{item.title}</h4>
             <p className="text-muted-foreground text-sm">{item.company}</p>
-            {Array.isArray(item.details) ? (
-              <ul className="text-muted-foreground text-xs mt-2 leading-relaxed list-disc list-inside space-y-1">
-                {item.details.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-muted-foreground text-xs mt-2 leading-relaxed">{item.details}</p>
-            )}
+
+            <ul className="text-muted-foreground text-xs mt-2 leading-relaxed list-disc list-inside space-y-1">
+              {item.details.map((point, i) => (
+                <li key={i}>{point}</li>
+              ))}
+            </ul>
           </div>
         ))}
+      </div>
+
+      {/* Research Experience */}
+      <div className="flex items-center gap-3 mt-14 mb-6">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+          <Briefcase className="w-5 h-5 text-primary" />
+        </div>
+        <h3 className="text-lg font-semibold text-foreground">Research Experience</h3>
+      </div>
+
+      <div className="space-y-6 ml-5 border-l-2 border-border pl-6">
+        <div className="relative">
+          <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary" />
+          <span className="text-sm text-primary font-medium">{researchExperience.period}</span>
+          <h4 className="text-foreground font-medium mt-1">{researchExperience.title}</h4>
+          <p className="text-muted-foreground text-sm">{researchExperience.company}</p>
+
+          <ul className="text-muted-foreground text-xs mt-2 leading-relaxed list-disc list-inside space-y-1">
+            {researchExperience.details.map((point, i) => (
+              <li key={i}>{point}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
