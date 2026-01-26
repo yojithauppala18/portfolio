@@ -8,7 +8,7 @@ const PortfolioSection = () => {
       description:
         "Built a multilingual language translation system supporting Spanish, English, French, Chinese, and Russian. Designed and deployed the application using AWS infrastructure for scalable inference, enabling reliable real-time translation across multiple language pairs.",
       techStack: ["Python", "NLP", "AWS", "Machine Translation"],
-      image: "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
       github: "https://github.com/yojithauppala18/Language-translator",
     },
     {
@@ -17,7 +17,7 @@ const PortfolioSection = () => {
       description:
         "Developed a flight fare prediction system using large-scale U.S. airline data (1993–2024). Trained and evaluated LightGBM and XGBoost models to predict ticket prices, deploying the pipeline on AWS for scalable data processing and experimentation.",
       techStack: ["Python", "LightGBM", "XGBoost", "AWS", "Pandas"],
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80",
       github: "https://github.com/yojithauppala18/flight-fare-prediction",
     },
     {
@@ -26,7 +26,7 @@ const PortfolioSection = () => {
       description:
         "Built an end-to-end machine learning pipeline to predict customer churn using XGBoost. Applied feature engineering and SMOTE to handle class imbalance, achieving an AUC-ROC of 88% and enabling data-driven retention insights.",
       techStack: ["Python", "XGBoost", "scikit-learn", "Pandas"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
       github: "https://github.com/yojithauppala18/customer-churn-detection",
     },
     {
@@ -35,14 +35,13 @@ const PortfolioSection = () => {
       description:
         "Designed and implemented a distributed ETL pipeline processing 6.4M+ NYC taxi trip records using the Hadoop ecosystem. Built analytical workflows to uncover trip patterns and fare trends through scalable data processing.",
       techStack: ["Hadoop", "Hive", "Spark", "Python", "SQL"],
-      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=800&q=80",
       github: "https://github.com/yojithauppala18/NYC-taxi-dataset-analysis",
     },
   ];
 
   return (
     <section className="animate-fade-in">
-      {/* Section Header */}
       <h2 className="text-2xl font-semibold text-foreground mb-8 flex items-center gap-3">
         Projects
         <span className="flex-1 h-px bg-gradient-to-r from-primary/50 to-transparent ml-4" />
@@ -74,7 +73,6 @@ const PortfolioSection = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{project.description}</p>
 
-                {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.techStack.map((tech, techIndex) => (
                     <span
@@ -86,7 +84,6 @@ const PortfolioSection = () => {
                   ))}
                 </div>
 
-                {/* Links */}
                 <div className="flex gap-3">
                   <a
                     href={project.github}
