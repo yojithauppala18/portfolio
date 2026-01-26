@@ -1,35 +1,48 @@
-import { ExternalLink, Github } from "lucide-react";
+import { Github } from "lucide-react";
 
 const PortfolioSection = () => {
   const projects = [
     {
-      title: "LLM Financial Document Intelligence",
-      category: "AI/ML • NLP",
-      description: "Built a RAG-based NLP system using LangChain and OpenAI GPT models for extracting insights from investment documents. Implemented semantic search with FAISS vector store, achieving 40% faster research time for analysts.",
-      techStack: ["Python", "LangChain", "OpenAI", "FAISS", "Streamlit"],
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
-      github: "https://github.com/yojitha",
+      title: "Multilingual Language Translator",
+      category: "Applied NLP • AWS",
+      description:
+        "Built a multilingual language translation system supporting Spanish, English, French, Chinese, and Russian. Designed and deployed the application using AWS infrastructure for scalable inference, enabling reliable real-time translation across multiple language pairs.",
+      techStack: ["Python", "NLP", "AWS", "Machine Translation"],
+      image: "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=600&q=80",
+      github: "https://github.com/yojithauppala18/Language-translator",
     },
     {
-      title: "Customer Churn Prediction",
+      title: "Flight Fare Prediction System",
+      category: "Applied Machine Learning • AWS",
+      description:
+        "Developed a flight fare prediction system using large-scale U.S. airline data (1993–2024). Trained and evaluated LightGBM and XGBoost models to predict ticket prices, deploying the pipeline on AWS for scalable data processing and experimentation.",
+      techStack: ["Python", "LightGBM", "XGBoost", "AWS", "Pandas"],
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+      github: "https://github.com/yojithauppala18/flight-fare-prediction",
+    },
+    {
+      title: "Customer Churn Prediction & Analysis",
       category: "Machine Learning",
-      description: "Developed an end-to-end ML pipeline for predicting customer churn using XGBoost, achieving 88% AUC-ROC. Implemented feature engineering, SMOTE for class imbalance, and deployed with FastAPI.",
-      techStack: ["Python", "XGBoost", "scikit-learn", "FastAPI", "Docker"],
+      description:
+        "Built an end-to-end machine learning pipeline to predict customer churn using XGBoost. Applied feature engineering and SMOTE to handle class imbalance, achieving an AUC-ROC of 88% and enabling data-driven retention insights.",
+      techStack: ["Python", "XGBoost", "scikit-learn", "Pandas"],
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
-      github: "https://github.com/yojitha",
+      github: "https://github.com/yojithauppala18/customer-churn-detection",
     },
     {
-      title: "HDFS ETL & NYC Taxi Analysis",
+      title: "NYC Taxi ETL & Analytics Pipeline",
       category: "Data Engineering",
-      description: "Designed and implemented a distributed ETL pipeline processing 6.4M+ NYC taxi records using Hadoop ecosystem. Built data warehouse with Hive and created analytical dashboards for trip pattern insights.",
+      description:
+        "Designed and implemented a distributed ETL pipeline processing 6.4M+ NYC taxi trip records using the Hadoop ecosystem. Built analytical workflows to uncover trip patterns and fare trends through scalable data processing.",
       techStack: ["Hadoop", "Hive", "Spark", "Python", "SQL"],
       image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
-      github: "https://github.com/yojitha",
+      github: "https://github.com/yojithauppala18/NYC-taxi-dataset-analysis",
     },
   ];
 
   return (
     <section className="animate-fade-in">
+      {/* Section Header */}
       <h2 className="text-2xl font-semibold text-foreground mb-8 flex items-center gap-3">
         Projects
         <span className="flex-1 h-px bg-gradient-to-r from-primary/50 to-transparent ml-4" />
@@ -59,9 +72,7 @@ const PortfolioSection = () => {
                 <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                  {project.description}
-                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{project.description}</p>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-4">
