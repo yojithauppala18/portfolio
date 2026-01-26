@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ProfileSidebar from "@/components/portfolio/ProfileSidebar";
 import Navigation from "@/components/portfolio/Navigation";
 import AboutSection from "@/components/portfolio/AboutSection";
@@ -8,8 +8,19 @@ import SkillsSection from "@/components/portfolio/SkillsSection";
 import PortfolioSection from "@/components/portfolio/PortfolioSection";
 import ContactSection from "@/components/portfolio/ContactSection";
 
+const validTabs = ["about", "experience", "education", "skills", "portfolio", "contact"] as const;
+type TabType = typeof validTabs[number];
+
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("about");
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Get tab from URL or default to "about"
+  const tabFromUrl = searchParams.get("tab");
+  const activeTab: TabType = validTabs.includes(tabFromUrl as TabType) ? (tabFromUrl as TabType) : "about";
+
+  const handleTabChange = (tab: string) => {
+    setSearchParams({ tab });
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -41,7 +52,7 @@ const Index = () => {
           <main className="flex-1">
             <div className="bg-card rounded-3xl p-6 md:p-8 gold-border card-shadow">
               {/* Navigation Tabs */}
-              <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+              <Navigation activeTab={activeTab} onTabChange={handleTabChange} />
 
               {/* Content */}
               <div key={activeTab}>{renderContent()}</div>
