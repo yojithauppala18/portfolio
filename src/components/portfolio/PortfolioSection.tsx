@@ -17,7 +17,7 @@ const PortfolioSection = () => {
       description:
         "Developed a flight fare prediction system using large-scale U.S. airline data (1993–2024). Trained and evaluated LightGBM and XGBoost models to predict ticket prices, deploying the pipeline on AWS for scalable data processing and experimentation.",
       techStack: ["Python", "LightGBM", "XGBoost", "AWS", "Pandas"],
-      image: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
       github: "https://github.com/yojithauppala18/flight-fare-prediction",
     },
     {
