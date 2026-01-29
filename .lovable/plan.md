@@ -1,158 +1,169 @@
 
 
-## Integrate EmailJS with Contact Form
+## Add Real-Time Portfolio Views Counter
 
 ### Summary
-Connect the contact form to EmailJS to send real emails when someone submits the form. This will:
-1. Send a notification email to you (Yojitha) with the recruiter's details
-2. Send an auto-reply email to the recruiter confirming receipt
-3. Display a success message and reset the form after 5 seconds
+Add a real-time views counter next to the resume icon in the profile sidebar. This will track how many people have visited your portfolio and display the count with a live indicator.
 
 ---
 
-### EmailJS Configuration
+### Architecture Overview
 
-**Credentials provided:**
-- Service ID: `service_s6uz55p`
-- Public Key: `ABTqA-qMU-9z-eb0L`
-- Contact Us Template ID: `template_30mcorh` (notifies you)
-- Auto-Reply Template ID: `template_3aodb64` (confirms to sender)
-
-**Note:** The EmailJS public key is safe to include in frontend code - it's designed to be public and only works with your configured templates.
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    Profile Sidebar                              │
+│                                                                 │
+│   [GitHub] [LinkedIn] [Resume]  👁 1,234 views                 │
+│                                      ↑                          │
+│                           Real-time counter                     │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓
+                    ┌─────────────────┐
+                    │    Supabase     │
+                    │  ┌───────────┐  │
+                    │  │   views   │  │
+                    │  │  table    │  │
+                    │  └───────────┘  │
+                    └─────────────────┘
+```
 
 ---
 
 ### Implementation Steps
 
-#### 1. Install EmailJS Package
+#### 1. Connect Supabase to the Project
 
-Add the `@emailjs/browser` package to the project dependencies.
+We'll need to connect Supabase to enable database storage for view counts. This will prompt you to either:
+- Create a new Supabase project (Lovable Cloud), or
+- Connect an existing Supabase project
 
-#### 2. Update ContactSection Component
+#### 2. Create Database Table
 
-**File: `src/components/portfolio/ContactSection.tsx`**
+Create a `page_views` table to store view counts:
 
-**Changes:**
-- Import and initialize EmailJS with your public key
-- Add a `messageSent` state to track successful submission
-- Update `handleSubmit` to:
-  - Send the "Contact Us" template (notifies you)
-  - Send the "Auto-Reply" template (confirms to sender)
-  - Show success UI on completion
-  - Reset form after 5 seconds
-- Add conditional rendering for success message
+```sql
+create table public.page_views (
+  id uuid primary key default gen_random_uuid(),
+  page_name text unique not null,
+  view_count bigint default 0,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
 
-**Template Parameters Mapping:**
+-- Insert initial row for portfolio
+insert into public.page_views (page_name, view_count)
+values ('portfolio', 0);
 
-For `template_30mcorh` (Contact Us - notifies you):
-```javascript
-{
-  name: formData.name,
-  recruiter_email: formData.email,
-  message: formData.message,
-  submitted_at: new Date().toLocaleString()
-}
+-- Enable RLS
+alter table public.page_views enable row level security;
+
+-- Allow anyone to read view counts (public portfolio)
+create policy "Anyone can view page counts"
+  on public.page_views for select
+  using (true);
+
+-- Allow anonymous users to increment views
+create policy "Anyone can update view counts"
+  on public.page_views for update
+  using (true);
 ```
 
-For `template_3aodb64` (Auto-Reply - confirms to sender):
-```javascript
-{
-  name: formData.name,
-  recruiter_email: formData.email
-}
-```
+#### 3. Create ViewCounter Component
 
----
+**New file: `src/components/portfolio/ViewCounter.tsx`**
 
-### Updated Component Structure
+A component that:
+- Fetches the current view count on mount
+- Increments the count once per session (to avoid inflating numbers)
+- Subscribes to real-time updates using Supabase Realtime
+- Displays the count with a subtle "live" indicator
 
 ```tsx
-const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [messageSent, setMessageSent] = useState(false);
-  const [formData, setFormData] = useState({ ... });
+const ViewCounter = () => {
+  const [viewCount, setViewCount] = useState<number | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Send notification email to Yojitha
-      await emailjs.send("service_s6uz55p", "template_30mcorh", {
-        name: formData.name,
-        recruiter_email: formData.email,
-        message: formData.message,
-        submitted_at: new Date().toLocaleString(),
-      });
-
-      // Send auto-reply to recruiter
-      await emailjs.send("service_s6uz55p", "template_3aodb64", {
-        name: formData.name,
-        recruiter_email: formData.email,
-      });
-
-      setMessageSent(true);
-      
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        setMessageSent(false);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      }, 5000);
-
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+  useEffect(() => {
+    // Check if already counted this session
+    const hasViewed = sessionStorage.getItem('portfolio_viewed');
+    
+    // Fetch current count
+    fetchViewCount();
+    
+    // Increment if not already viewed
+    if (!hasViewed) {
+      incrementViewCount();
+      sessionStorage.setItem('portfolio_viewed', 'true');
     }
-  };
-
-  // Show success message when sent
-  if (messageSent) {
-    return (
-      <section className="animate-fade-in">
-        {/* Success UI with checkmark */}
-      </section>
-    );
-  }
+    
+    // Subscribe to real-time updates
+    const subscription = supabase
+      .channel('page_views')
+      .on('postgres_changes', ...)
+      .subscribe();
+      
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
-    // Existing form UI
+    <div className="flex items-center gap-1.5 px-3 py-1.5 ...">
+      <Eye className="w-4 h-4" />
+      <span>{viewCount?.toLocaleString() ?? '...'}</span>
+    </div>
   );
 };
 ```
 
+#### 4. Update ProfileSidebar
+
+**File: `src/components/portfolio/ProfileSidebar.tsx`**
+
+Add the ViewCounter component next to the social links:
+
+```tsx
+{/* Social Links */}
+<div className="flex justify-center items-center gap-3">
+  {socialLinks.map(...)}
+  <ResumeModal />
+  <ViewCounter />
+</div>
+```
+
 ---
 
-### Success Message UI
+### UI Design
 
-When the form is submitted successfully, display:
-- A checkmark icon with animation
-- "Your message has been received!" heading
-- "Thank you for reaching out. I'll get back to you within 24-48 hours." description
-- A note that the form will reset automatically
+The view counter will display as:
+- A pill-shaped badge next to the resume icon
+- Shows an eye icon with the view count
+- Matches the existing design (rounded, uses secondary background with gold border)
+- Numbers formatted with commas (e.g., "1,234")
 
 ---
 
-### Files to Modify
+### Files to Create/Modify
 
 | File | Action |
 |------|--------|
-| `package.json` | Add `@emailjs/browser` dependency |
-| `src/components/portfolio/ContactSection.tsx` | Integrate EmailJS and add success state |
+| Supabase Connection | Enable Supabase integration |
+| Database Migration | Create `page_views` table with RLS policies |
+| `src/components/portfolio/ViewCounter.tsx` | New component for real-time views |
+| `src/components/portfolio/ProfileSidebar.tsx` | Add ViewCounter next to social links |
 
 ---
 
-### User Experience Flow
+### Real-Time Behavior
 
-1. User fills out the contact form
-2. User clicks "Send Message"
-3. Button shows loading spinner
-4. Two emails are sent (notification + auto-reply)
-5. Form is replaced with success message
-6. After 5 seconds, form reappears empty and ready for new submission
+- When someone visits the portfolio, the view count increments
+- All visitors see the count update live (via Supabase Realtime)
+- Session storage prevents the same visitor from inflating counts on refresh
+- The counter shows "..." while loading, then animates to the actual number
+
+---
+
+### Technical Notes
+
+- **Session-based tracking**: Uses `sessionStorage` to count unique sessions, not page loads
+- **Real-time updates**: Leverages Supabase's real-time subscriptions for live updates
+- **Public access**: RLS policies allow anyone to read/update (appropriate for a public portfolio)
+- **Graceful fallback**: Shows loading state if Supabase connection fails
 
